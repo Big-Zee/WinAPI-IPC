@@ -30,7 +30,7 @@ namespace DataToSend
             }
 
             /// <summary>
-            /// Message description string with fixed length
+            /// Message description string with fixed length. Description should be longer than title.
             /// </summary>
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 256)]            
             private string messageDescription;
