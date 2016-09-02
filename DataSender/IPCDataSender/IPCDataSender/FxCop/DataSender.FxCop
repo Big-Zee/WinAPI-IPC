@@ -1,0 +1,416 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FxCopProject Version="10.0" Name="My FxCop Project">
+ <ProjectOptions>
+  <SharedProject>True</SharedProject>
+  <Stylesheet Apply="False">$(FxCopDir)\Xml\FxCopReport.xsl</Stylesheet>
+  <SaveMessages>
+   <Project Status="Active, Excluded, Good, Noise" NewOnly="False" />
+   <Report Status="Active, Good, Noise" NewOnly="False" />
+  </SaveMessages>
+  <ProjectFile Compress="True" DefaultTargetCheck="True" DefaultRuleCheck="True" SaveByRuleGroup="" Deterministic="True" />
+  <EnableMultithreadedLoad>True</EnableMultithreadedLoad>
+  <EnableMultithreadedAnalysis>True</EnableMultithreadedAnalysis>
+  <SourceLookup>True</SourceLookup>
+  <AnalysisExceptionsThreshold>10</AnalysisExceptionsThreshold>
+  <RuleExceptionsThreshold>1</RuleExceptionsThreshold>
+  <Spelling Locale="en-US" />
+  <OverrideRuleVisibilities>False</OverrideRuleVisibilities>
+  <CustomDictionaries SearchFxCopDir="True" SearchUserProfile="True" SearchProjectDir="True" />
+  <SearchGlobalAssemblyCache>False</SearchGlobalAssemblyCache>
+  <DeadlockDetectionTimeout>120</DeadlockDetectionTimeout>
+  <IgnoreGeneratedCode>False</IgnoreGeneratedCode>
+ </ProjectOptions>
+ <Targets>
+  <Target Name="$(ProjectDir)/../bin/Debug/IPCDataSender.exe" Analyze="True" AnalyzeAllChildren="True" />
+ </Targets>
+ <Rules>
+  <RuleFiles>
+   <RuleFile Name="$(FxCopDir)\Rules\DesignRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\GlobalizationRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\InteroperabilityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\MobilityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\NamingRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\PerformanceRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\PortabilityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\SecurityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\SecurityTransparencyRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\UsageRules.dll" Enabled="True" AllRulesEnabled="True" />
+  </RuleFiles>
+  <Groups />
+  <Settings />
+ </Rules>
+ <FxCopReport Version="10.0">
+  <Namespaces>
+   <Namespace Name="IPCDataSender">
+    <Messages>
+     <Message Id="IPC" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2016-09-02 21:31:24Z">
+      <Issue Name="Namespace">
+       <Item>IPC</Item>
+       <Item>IPCDataSender</Item>
+       <Item>Ipc</Item>
+      </Issue>
+     </Message>
+    </Messages>
+   </Namespace>
+  </Namespaces>
+  <Targets>
+   <Target Name="$(ProjectDir)/../bin/Debug/IPCDataSender.exe">
+    <Modules>
+     <Module Name="ipcdatasender.exe">
+      <Messages>
+       <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Created="2016-09-02 21:31:24Z">
+        <Issue Name="NoStrongName">
+         <Item>'IPCDataSender.exe'</Item>
+        </Issue>
+       </Message>
+       <Message Id="IPC" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2016-09-02 21:31:24Z">
+        <Issue Name="Assembly">
+         <Item>IPC</Item>
+         <Item>'IPCDataSender.exe'</Item>
+         <Item>Ipc</Item>
+        </Issue>
+       </Message>
+       <Message TypeName="MarkAssembliesWithClsCompliant" Category="Microsoft.Design" CheckId="CA1014" Created="2016-09-02 21:31:24Z">
+        <Issue>
+         <Item>'IPCDataSender.exe'</Item>
+        </Issue>
+       </Message>
+       <Message TypeName="MarkAssembliesWithNeutralResourcesLanguage" Category="Microsoft.Performance" CheckId="CA1824" Created="2016-09-02 21:31:24Z">
+        <Issue>
+         <Item>'IPCDataSender.exe'</Item>
+        </Issue>
+       </Message>
+      </Messages>
+      <Namespaces>
+       <Namespace Name="IPCDataSender">
+        <Types>
+         <Type Name="FormMain">
+          <Members>
+           <Member Name="#FindWindow(System.String,System.String)">
+            <Messages>
+             <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Created="2016-09-02 21:31:24Z">
+              <Issue>
+               <Item>'FormMain.FindWindow(string, string)'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="PInvokesShouldNotBeVisible" Category="Microsoft.Interoperability" CheckId="CA1401" Created="2016-09-02 21:31:24Z">
+              <Issue>
+               <Item>'FormMain.FindWindow(string, string)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="0" TypeName="SpecifyMarshalingForPInvokeStringArguments" Category="Microsoft.Globalization" CheckId="CA2101" Created="2016-09-02 21:31:24Z">
+              <Issue Name="ParameterImplicitAnsi">
+               <Item>'lpClassName'</Item>
+              </Issue>
+             </Message>
+             <Message Id="1" TypeName="SpecifyMarshalingForPInvokeStringArguments" Category="Microsoft.Globalization" CheckId="CA2101" Created="2016-09-02 21:31:24Z">
+              <Issue Name="ParameterImplicitAnsi">
+               <Item>'lpWindowName'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="MessageHelper">
+          <Members>
+           <Member Name="#IntPtrAlloc`1(!!0)">
+            <Messages>
+             <Message Id="Alloc" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2016-09-02 21:31:24Z">
+              <Issue Name="Member">
+               <Item>Alloc</Item>
+               <Item>'MessageHelper.IntPtrAlloc&lt;T&gt;(T)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="param" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2016-09-02 21:31:24Z">
+              <Issue Name="MemberParameter">
+               <Item>'MessageHelper.IntPtrAlloc&lt;T&gt;(T)'</Item>
+               <Item>param</Item>
+               <Item>'param'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#IntPtrFree(System.IntPtr&amp;)">
+            <Messages>
+             <Message Id="0#" TypeName="DoNotPassTypesByReference" Category="Microsoft.Design" CheckId="CA1045" Created="2016-09-02 21:31:24Z">
+              <Issue Certainty="50">
+               <Item>'preAllocated'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="DoNotRaiseReservedExceptionTypes" Category="Microsoft.Usage" CheckId="CA2201" Created="2016-09-02 21:31:24Z">
+              <Issue Name="Reserved">
+               <Item>'MessageHelper.IntPtrFree(ref IntPtr)'</Item>
+               <Item>'NullReferenceException'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#SendData(System.Int32,System.String)">
+            <Messages>
+             <Message Id="IPCDataSender.MessageHelper.SendMessage(System.Int32,System.Int32,System.Int32,System.IntPtr)" TypeName="DoNotIgnoreMethodResults" Category="Microsoft.Usage" CheckId="CA1806" Created="2016-09-02 21:31:24Z">
+              <Issue Name="HResultOrErrorCode">
+               <Item>'MessageHelper.SendData(int, string)'</Item>
+               <Item>'MessageHelper.SendMessage(int, int, int, IntPtr)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="Wnd" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2016-09-02 21:31:24Z">
+              <Issue Name="MemberParameter">
+               <Item>'MessageHelper.SendData(int, string)'</Item>
+               <Item>Wnd</Item>
+               <Item>'hWnd'</Item>
+              </Issue>
+             </Message>
+             <Message Id="h" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2016-09-02 21:31:24Z">
+              <Issue Name="MemberParameter">
+               <Item>'MessageHelper.SendData(int, string)'</Item>
+               <Item>h</Item>
+               <Item>'hWnd'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2016-09-02 21:31:24Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'MessageHelper.SendData(int, string)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#SendMessage(System.Int32,System.Int32,System.Int32,System.IntPtr)">
+            <Messages>
+             <Message Id="Msg" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2016-09-02 21:31:24Z">
+              <Issue Name="MemberParameter">
+               <Item>'MessageHelper.SendMessage(int, int, int, IntPtr)'</Item>
+               <Item>Msg</Item>
+               <Item>'Msg'</Item>
+               <Item>msg</Item>
+              </Issue>
+             </Message>
+             <Message Id="Param" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2016-09-02 21:31:24Z">
+              <Issue Name="MemberParameter">
+               <Item>'MessageHelper.SendMessage(int, int, int, IntPtr)'</Item>
+               <Item>Param</Item>
+               <Item>'lParam'</Item>
+              </Issue>
+              <Issue Name="MemberParameter">
+               <Item>'MessageHelper.SendMessage(int, int, int, IntPtr)'</Item>
+               <Item>Param</Item>
+               <Item>'wParam'</Item>
+              </Issue>
+             </Message>
+             <Message Id="Wnd" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2016-09-02 21:31:24Z">
+              <Issue Name="MemberParameter">
+               <Item>'MessageHelper.SendMessage(int, int, int, IntPtr)'</Item>
+               <Item>Wnd</Item>
+               <Item>'hWnd'</Item>
+              </Issue>
+             </Message>
+             <Message Id="h" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2016-09-02 21:31:24Z">
+              <Issue Name="MemberParameter">
+               <Item>'MessageHelper.SendMessage(int, int, int, IntPtr)'</Item>
+               <Item>h</Item>
+               <Item>'hWnd'</Item>
+              </Issue>
+             </Message>
+             <Message Id="l" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2016-09-02 21:31:24Z">
+              <Issue Name="MemberParameter">
+               <Item>'MessageHelper.SendMessage(int, int, int, IntPtr)'</Item>
+               <Item>l</Item>
+               <Item>'lParam'</Item>
+              </Issue>
+             </Message>
+             <Message Id="w" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2016-09-02 21:31:24Z">
+              <Issue Name="MemberParameter">
+               <Item>'MessageHelper.SendMessage(int, int, int, IntPtr)'</Item>
+               <Item>w</Item>
+               <Item>'wParam'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Created="2016-09-02 21:31:24Z">
+              <Issue>
+               <Item>'MessageHelper.SendMessage(int, int, int, IntPtr)'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="PInvokesShouldNotBeVisible" Category="Microsoft.Interoperability" CheckId="CA1401" Created="2016-09-02 21:31:24Z">
+              <Issue>
+               <Item>'MessageHelper.SendMessage(int, int, int, IntPtr)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#WM_COPYDATA">
+            <Messages>
+             <Message Id="COPYDATA" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2016-09-02 21:31:24Z">
+              <Issue Name="Member">
+               <Item>COPYDATA</Item>
+               <Item>'MessageHelper.WM_COPYDATA'</Item>
+               <Item>Copydata</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="IdentifiersShouldNotContainUnderscores" Category="Microsoft.Naming" CheckId="CA1707" Created="2016-09-02 21:31:24Z">
+              <Issue Name="Member">
+               <Item>'MessageHelper.WM_COPYDATA'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#WM_USER">
+            <Messages>
+             <Message Id="USER" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2016-09-02 21:31:24Z">
+              <Issue Name="Member">
+               <Item>USER</Item>
+               <Item>'MessageHelper.WM_USER'</Item>
+               <Item>User</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="IdentifiersShouldNotContainUnderscores" Category="Microsoft.Naming" CheckId="CA1707" Created="2016-09-02 21:31:24Z">
+              <Issue Name="Member">
+               <Item>'MessageHelper.WM_USER'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="MessageHelper+COPYDATASTRUCT">
+          <Messages>
+           <Message Id="COPYDATASTRUCT" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2016-09-02 21:31:24Z">
+            <Issue Name="Type">
+             <Item>COPYDATASTRUCT</Item>
+             <Item>'MessageHelper.COPYDATASTRUCT'</Item>
+             <Item>Copydatastruct</Item>
+            </Issue>
+           </Message>
+           <Message TypeName="NestedTypesShouldNotBeVisible" Category="Microsoft.Design" CheckId="CA1034" Created="2016-09-02 21:31:24Z">
+            <Issue>
+             <Item>'MessageHelper.COPYDATASTRUCT'</Item>
+            </Issue>
+           </Message>
+           <Message TypeName="OverrideEqualsAndOperatorEqualsOnValueTypes" Category="Microsoft.Performance" CheckId="CA1815" Created="2016-09-02 21:31:24Z">
+            <Issue Name="Equals">
+             <Item>'MessageHelper.COPYDATASTRUCT'</Item>
+            </Issue>
+            <Issue Name="op_Equality">
+             <Item>'MessageHelper.COPYDATASTRUCT'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#cbData">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2016-09-02 21:31:24Z">
+              <Issue>
+               <Item>'MessageHelper.COPYDATASTRUCT.cbData'</Item>
+              </Issue>
+             </Message>
+             <Message Id="cb" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2016-09-02 21:31:24Z">
+              <Issue Name="Member">
+               <Item>cb</Item>
+               <Item>'MessageHelper.COPYDATASTRUCT.cbData'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#dwData">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2016-09-02 21:31:24Z">
+              <Issue>
+               <Item>'MessageHelper.COPYDATASTRUCT.dwData'</Item>
+              </Issue>
+             </Message>
+             <Message Id="dw" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2016-09-02 21:31:24Z">
+              <Issue Name="Member">
+               <Item>dw</Item>
+               <Item>'MessageHelper.COPYDATASTRUCT.dwData'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="PointersShouldNotBeVisible" Category="Microsoft.Security" CheckId="CA2111" Created="2016-09-02 21:31:24Z">
+              <Issue>
+               <Item>'MessageHelper.COPYDATASTRUCT.dwData'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#lpData">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2016-09-02 21:31:24Z">
+              <Issue>
+               <Item>'MessageHelper.COPYDATASTRUCT.lpData'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="PointersShouldNotBeVisible" Category="Microsoft.Security" CheckId="CA2111" Created="2016-09-02 21:31:24Z">
+              <Issue>
+               <Item>'MessageHelper.COPYDATASTRUCT.lpData'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+      </Namespaces>
+     </Module>
+    </Modules>
+   </Target>
+  </Targets>
+  <Rules>
+   <Rule TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210">
+    <Resolution Name="NoStrongName">Sign {0} with a strong name key.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051">
+    <Resolution Name="Default">Because field {0} is visible outside of its declaring type, change its accessibility to private and add a property, with the same accessibility as the field has currently, to provide access to it.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotIgnoreMethodResults" Category="Microsoft.Usage" CheckId="CA1806">
+    <Resolution Name="HResultOrErrorCode">{0} calls {1} but does not use the HRESULT or error code that the method returns. This could lead to unexpected behavior in error conditions or low-resource situations. Use the result in a conditional statement, assign the result to a variable, or pass it as an argument to another method.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotPassTypesByReference" Category="Microsoft.Design" CheckId="CA1045">
+    <Resolution Name="Default">Consider a design that does not require that {0} be a reference parameter.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotRaiseReservedExceptionTypes" Category="Microsoft.Usage" CheckId="CA2201">
+    <Resolution Name="Reserved">{0} creates an exception of type {1}, an exception type that is reserved by the runtime and should never be raised by managed code. If this exception instance might be thrown, use a different exception type.</Resolution>
+   </Rule>
+   <Rule TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709">
+    <Resolution Name="Assembly">Correct the casing of '{0}' in assembly name {1} by changing it to '{2}'.</Resolution>
+    <Resolution Name="Member">Correct the casing of '{0}' in member name {1} by changing it to '{2}'.</Resolution>
+    <Resolution Name="MemberParameter">In member {0}, correct the casing of '{1}' in parameter name {2} by changing it to '{3}'.</Resolution>
+    <Resolution Name="Namespace">Correct the casing of '{0}' in namespace name '{1}' by changing it to '{2}'.</Resolution>
+    <Resolution Name="Type">Correct the casing of '{0}' in type name {1} by changing it to '{2}'.</Resolution>
+   </Rule>
+   <Rule TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704">
+    <Resolution Name="Member">Correct the spelling of '{0}' in member name {1} or remove it entirely if it represents any sort of Hungarian notation.</Resolution>
+    <Resolution Name="MemberParameter">In method {0}, correct the spelling of '{1}' in parameter name {2} or remove it entirely if it represents any sort of Hungarian notation.</Resolution>
+   </Rule>
+   <Rule TypeName="IdentifiersShouldNotContainUnderscores" Category="Microsoft.Naming" CheckId="CA1707">
+    <Resolution Name="Member">Remove the underscores from member name {0}.</Resolution>
+   </Rule>
+   <Rule TypeName="MarkAssembliesWithClsCompliant" Category="Microsoft.Design" CheckId="CA1014">
+    <Resolution Name="Default">Mark {0} with CLSCompliant(true) because it exposes externally visible types.</Resolution>
+   </Rule>
+   <Rule TypeName="MarkAssembliesWithNeutralResourcesLanguage" Category="Microsoft.Performance" CheckId="CA1824">
+    <Resolution Name="Default">Because assembly {0} contains a ResX-based resource file, mark it with the NeutralResourcesLanguage attribute, specifying the language of the resources within the assembly. This could improve lookup performance the first time a resource is retrieved.</Resolution>
+   </Rule>
+   <Rule TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822">
+    <Resolution Name="Default">The 'this' parameter (or 'Me' in Visual Basic) of {0} is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Resolution>
+   </Rule>
+   <Rule TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060">
+    <Resolution Name="Default">Because it is a P/Invoke method, {0} should be defined in a class named NativeMethods, SafeNativeMethods, or UnsafeNativeMethods.</Resolution>
+   </Rule>
+   <Rule TypeName="NestedTypesShouldNotBeVisible" Category="Microsoft.Design" CheckId="CA1034">
+    <Resolution Name="Default">Do not nest type {0}. Alternatively, change its accessibility so that it is not externally visible.</Resolution>
+   </Rule>
+   <Rule TypeName="OverrideEqualsAndOperatorEqualsOnValueTypes" Category="Microsoft.Performance" CheckId="CA1815">
+    <Resolution Name="Equals">{0} should override Equals.</Resolution>
+    <Resolution Name="op_Equality">{0} should override the equality (==) and inequality (!=) operators.</Resolution>
+   </Rule>
+   <Rule TypeName="PInvokesShouldNotBeVisible" Category="Microsoft.Interoperability" CheckId="CA1401">
+    <Resolution Name="Default">Change the accessibility of P/Invoke {0} so that it is no longer visible from outside its assembly.</Resolution>
+   </Rule>
+   <Rule TypeName="PointersShouldNotBeVisible" Category="Microsoft.Security" CheckId="CA2111">
+    <Resolution Name="Default">Make {0} private.</Resolution>
+   </Rule>
+   <Rule TypeName="SpecifyMarshalingForPInvokeStringArguments" Category="Microsoft.Globalization" CheckId="CA2101">
+    <Resolution Name="ParameterImplicitAnsi">To reduce security risk, marshal parameter {0} as Unicode, by setting DllImport.CharSet to CharSet.Unicode, or by explicitly marshaling the parameter as UnmanagedType.LPWStr. If you need to marshal this string as ANSI or system-dependent, specify MarshalAs explicitly, and set BestFitMapping=false; for added security, also set ThrowOnUnmappableChar=true.</Resolution>
+   </Rule>
+  </Rules>
+ </FxCopReport>
+</FxCopProject>
