@@ -1,5 +1,0 @@
-C:\Users\ZAMI\Documents\Visual Studio 2012\SendData\DataToSend\DataToSend\bin\Debug\DataToSend.dll
-C:\Users\ZAMI\Documents\Visual Studio 2012\SendData\DataToSend\DataToSend\bin\Debug\DataToSend.pdb
-C:\Users\ZAMI\Documents\Visual Studio 2012\SendData\DataToSend\DataToSend\obj\Debug\DataToSend.dll
-C:\Users\ZAMI\Documents\Visual Studio 2012\SendData\DataToSend\DataToSend\obj\Debug\DataToSend.pdb
-C:\Users\ZAMI\Documents\Visual Studio 2012\SendData\DataToSend\DataToSend\bin\Debug\DataToSend.XML
