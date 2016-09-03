@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using DataToSend;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Globalization;
 
 namespace IPCDataReceiver
 {
@@ -84,7 +85,7 @@ namespace IPCDataReceiver
 
         private void UpdateLabelAvarage(double avarageTicks)
         {
-            labelTicksAvarage.Text = avarageTicks.ToString();
+            labelTicksAvarage.Text = avarageTicks.ToString(CultureInfo.CurrentCulture);
         }
     }
 }
