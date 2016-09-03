@@ -10,18 +10,12 @@ using System.Windows.Forms;
 using DataToSend;
 using System.Runtime.InteropServices;
 
+[assembly: CLSCompliant(true)]
 namespace IPCDataSender
 {
     public partial class FormMain : Form
     {
-        /// <summary>
-        /// FindWindow winAPI method
-        /// </summary>
-        /// <param name="lpClassName"></param>
-        /// <param name="lpWindowName"></param>
-        /// <returns></returns>
-        [DllImport("User32.dll", EntryPoint = "FindWindow", SetLastError = true)]
-        public static extern int FindWindow(String lpClassName, String lpWindowName);
+        
         private static int counter = 0;
 
         public FormMain()
@@ -31,14 +25,15 @@ namespace IPCDataSender
 
         private void buttonSendMessage_Click(object sender, EventArgs e)
         {
+            NativeMethods nativeMethods = new NativeMethods();
             var ReceiverMainWindowTitle = "IPCDataReceiver";
-            int ReceiverHandle = FindWindow(null, ReceiverMainWindowTitle);
+            int ReceiverHandle = nativeMethods.FindWindow(ReceiverMainWindowTitle);
             if (ReceiverHandle != 0)
             {
-                MessageHelper msgHelp = new MessageHelper();
+                
                 for (int i = 0; i < 100; i++)
                 {
-                    msgHelp.SendData(ReceiverHandle, "Count" + i);
+                    nativeMethods.SendData(ReceiverHandle, "Count" + i);
                 }
             }
             else

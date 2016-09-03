@@ -5,18 +5,28 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using DataToSend;
+using System.Diagnostics;
 
 namespace IPCDataSender
 {
-    public class MessageHelper
+    public class NativeMethods
     {
+        /// <summary>
+        /// FindWindow winAPI method
+        /// </summary>
+        /// <param name="lpClassName"></param>
+        /// <param name="lpWindowName"></param>
+        /// <returns></returns>
+        [DllImport("User32.dll", EntryPoint = "FindWindow", SetLastError = true,CharSet=CharSet.Unicode)]
+        private static extern int FindWindow(String lpClassName, String lpWindowName);
+
         // The COPYDATASTRUCT describes the data that is passed.
         // The message is routed via the receiving process's window handle.
         // The first field, dwData, may contain anything the sender wishes; it is the equivalent of System.Object sender in an EventHandler.
         // The count of bytes is given in cbData.
         // And the data itself is pointed to by lpData.
         [StructLayout(LayoutKind.Sequential)]
-        public struct COPYDATASTRUCT
+        private struct COPYDATASTRUCT
         {
             public IntPtr dwData;
             public int cbData;
@@ -24,10 +34,10 @@ namespace IPCDataSender
         }
 
         [DllImport("User32.dll", EntryPoint = "SendMessage")]
-        public static extern int SendMessage(int hWnd, int Msg, int wParam, IntPtr lParam);
+        private static extern int SendMessage(int hWnd, int Msg, int wParam, IntPtr lParam);
 
-        public const int WM_USER = 0x400;
-        public const int WM_COPYDATA = 0x4A;
+        private const int WM_USER = 0x400;
+        private const int WM_COPYDATA = 0x4A;
 
         /// <summary>
         /// Allocate a pointer to an arbitrary structure on the global heap.
@@ -35,7 +45,7 @@ namespace IPCDataSender
         /// <typeparam name="T"></typeparam>
         /// <param name="param"></param>
         /// <returns></returns>
-        public static IntPtr IntPtrAlloc<T>(T param)
+        private static IntPtr IntPtrAlloc<T>(T param)
         {
             IntPtr retval = Marshal.AllocHGlobal(Marshal.SizeOf(param));
             Marshal.StructureToPtr(param, retval, false);
@@ -46,12 +56,17 @@ namespace IPCDataSender
         /// Free a pointer to an arbitrary structure from the global heap.
         /// </summary>
         /// <param name="preAllocated"></param>
-        public static void IntPtrFree(ref IntPtr preAllocated)
+        private static void IntPtrFree(ref IntPtr preAllocated)
         {
             if (IntPtr.Zero == preAllocated)
                 throw (new NullReferenceException("Go Home"));
             Marshal.FreeHGlobal(preAllocated);
             preAllocated = IntPtr.Zero;
+        }
+
+        public int FindWindow(string windowName)
+        {
+            return FindWindow(null, windowName);
         }
 
         public void SendData(int hWnd, string txtToSend)
@@ -70,7 +85,8 @@ namespace IPCDataSender
             copyData.lpData = buffer;
             copyData.cbData = Marshal.SizeOf(singlePacket);
             IntPtr copyDataBuff = IntPtrAlloc(copyData);
-            SendMessage(hWnd, WM_COPYDATA, 0, copyDataBuff);
+            var result = SendMessage(hWnd, WM_COPYDATA, 0, copyDataBuff);
+            Trace.WriteLine("SendMessage result : " + result);
             IntPtrFree(ref copyDataBuff);
             IntPtrFree(ref buffer);
         }
