@@ -35,10 +35,10 @@ namespace IPCDataReceiver
             public IntPtr lpData;
         }
 
-        public Stopwatch MessagesStopWatch = new Stopwatch();
-        public int MessagesReceivedCount = 1;
-        public long sum = 0;
-        public double avarage = 0.0;
+        private Stopwatch MessagesStopWatch = new Stopwatch();
+        private int MessagesReceivedCount = 1;
+        private long sum = 0;
+        private double avarage = 0.0;
 
         public IPCDataReceiver()
         {

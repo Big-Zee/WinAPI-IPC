@@ -21,7 +21,7 @@
   <IgnoreGeneratedCode>False</IgnoreGeneratedCode>
  </ProjectOptions>
  <Targets>
-  <Target Name="$(ProjectDir)/../bin/Debug/IPCDataSender.exe" Analyze="True" AnalyzeAllChildren="True" />
+  <Target Name="$(ProjectDir)/../../../../DataReceiver/IPCDataReceiver/IPCDataReceiver/bin/Debug/IPCDataReceiver.exe" Analyze="True" AnalyzeAllChildren="True" />
  </Targets>
  <Rules>
   <RuleFiles>
@@ -41,12 +41,12 @@
  </Rules>
  <FxCopReport Version="10.0">
   <Namespaces>
-   <Namespace Name="IPCDataSender">
+   <Namespace Name="IPCDataReceiver">
     <Messages>
-     <Message Id="IPC" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2016-09-02 21:31:24Z">
+     <Message Id="IPC" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2016-09-03 19:49:38Z">
       <Issue Name="Namespace">
        <Item>IPC</Item>
-       <Item>IPCDataSender</Item>
+       <Item>IPCDataReceiver</Item>
        <Item>Ipc</Item>
       </Issue>
      </Message>
@@ -54,67 +54,109 @@
    </Namespace>
   </Namespaces>
   <Targets>
-   <Target Name="$(ProjectDir)/../bin/Debug/IPCDataSender.exe">
+   <Target Name="$(ProjectDir)/../../../../DataReceiver/IPCDataReceiver/IPCDataReceiver/bin/Debug/IPCDataReceiver.exe">
     <Modules>
-     <Module Name="ipcdatasender.exe">
+     <Module Name="ipcdatareceiver.exe">
       <Messages>
-       <Message Id="IPC" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2016-09-02 21:31:24Z">
+       <Message Id="IPC" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2016-09-03 19:49:38Z">
         <Issue Name="Assembly">
          <Item>IPC</Item>
-         <Item>'IPCDataSender.exe'</Item>
+         <Item>'IPCDataReceiver.exe'</Item>
          <Item>Ipc</Item>
         </Issue>
        </Message>
       </Messages>
       <Namespaces>
-       <Namespace Name="IPCDataSender">
+       <Namespace Name="IPCDataReceiver">
         <Types>
-         <Type Name="NativeMethods">
+         <Type Name="IPCDataReceiver">
+          <Messages>
+           <Message Id="IPC" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2016-09-03 19:49:38Z">
+            <Issue Name="Type">
+             <Item>IPC</Item>
+             <Item>'IPCDataReceiver'</Item>
+             <Item>Ipc</Item>
+            </Issue>
+           </Message>
+           <Message TypeName="TypeNamesShouldNotMatchNamespaces" Category="Microsoft.Naming" CheckId="CA1724" Created="2016-09-03 19:49:38Z">
+            <Issue>
+             <Item>'IPCDataReceiver'</Item>
+             <Item>IPCDataReceiver</Item>
+            </Issue>
+           </Message>
+          </Messages>
           <Members>
-           <Member Name="#FindWindow(System.String)">
+           <Member Name="#UpdateLabelAvarage(System.Double)">
             <Messages>
-             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2016-09-03 05:06:20Z" FixCategory="DependsOnFix">
-              <Issue>
-               <Item>'NativeMethods.FindWindow(string)'</Item>
+             <Message Id="System.Double.ToString" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2016-09-03 19:49:38Z">
+              <Issue Name="IFormatProviderAlternateString">
+               <Item>'double.ToString()'</Item>
+               <Item>'IPCDataReceiver.UpdateLabelAvarage(double)'</Item>
+               <Item>'double.ToString(IFormatProvider)'</Item>
+               <Item>'CultureInfo.CurrentCulture'</Item>
+               <Item>'CultureInfo.InvariantCulture'</Item>
               </Issue>
              </Message>
             </Messages>
            </Member>
-           <Member Name="#IntPtrFree(System.IntPtr&amp;)">
+           <Member Name="#WM_COPYDATA">
             <Messages>
-             <Message TypeName="DoNotRaiseReservedExceptionTypes" Category="Microsoft.Usage" CheckId="CA2201" Created="2016-09-03 05:06:20Z">
-              <Issue Name="Reserved">
-               <Item>'NativeMethods.IntPtrFree(ref IntPtr)'</Item>
-               <Item>'NullReferenceException'</Item>
+             <Message Id="COPYDATA" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2016-09-03 19:49:38Z">
+              <Issue Name="Member">
+               <Item>COPYDATA</Item>
+               <Item>'IPCDataReceiver.WM_COPYDATA'</Item>
+               <Item>Copydata</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="IdentifiersShouldNotContainUnderscores" Category="Microsoft.Naming" CheckId="CA1707" Created="2016-09-03 19:49:38Z">
+              <Issue Name="Member">
+               <Item>'IPCDataReceiver.WM_COPYDATA'</Item>
               </Issue>
              </Message>
             </Messages>
            </Member>
-           <Member Name="#SendData(System.Int32,System.String)">
+           <Member Name="#WndProc(System.Windows.Forms.Message&amp;)">
             <Messages>
-             <Message Id="IPCDataSender.NativeMethods.SendMessage(System.Int32,System.Int32,System.Int32,System.IntPtr)" TypeName="DoNotIgnoreMethodResults" Category="Microsoft.Usage" CheckId="CA1806" Created="2016-09-03 05:06:20Z">
-              <Issue Name="HResultOrErrorCode">
-               <Item>'NativeMethods.SendData(int, string)'</Item>
-               <Item>'NativeMethods.SendMessage(int, int, int, IntPtr)'</Item>
-              </Issue>
-             </Message>
-             <Message Id="Wnd" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2016-09-03 05:06:20Z">
-              <Issue Name="MemberParameter">
-               <Item>'NativeMethods.SendData(int, string)'</Item>
-               <Item>Wnd</Item>
-               <Item>'hWnd'</Item>
-              </Issue>
-             </Message>
-             <Message Id="h" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2016-09-03 05:06:20Z">
-              <Issue Name="MemberParameter">
-               <Item>'NativeMethods.SendData(int, string)'</Item>
-               <Item>h</Item>
-               <Item>'hWnd'</Item>
-              </Issue>
-             </Message>
-             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2016-09-03 05:06:20Z" FixCategory="DependsOnFix">
+             <Message Id="ErrorId" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Created="2016-09-03 19:49:38Z">
               <Issue>
-               <Item>'NativeMethods.SendData(int, string)'</Item>
+               <Item>'IPCDataReceiver.WndProc(ref Message)'</Item>
+               <Item>'ErrorId'</Item>
+               <Item>'int'</Item>
+              </Issue>
+             </Message>
+             <Message Id="MessageDescription" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Created="2016-09-03 19:49:38Z">
+              <Issue>
+               <Item>'IPCDataReceiver.WndProc(ref Message)'</Item>
+               <Item>'MessageDescription'</Item>
+               <Item>'string'</Item>
+              </Issue>
+             </Message>
+             <Message Id="MessageTitle" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Created="2016-09-03 19:49:38Z">
+              <Issue>
+               <Item>'IPCDataReceiver.WndProc(ref Message)'</Item>
+               <Item>'MessageTitle'</Item>
+               <Item>'string'</Item>
+              </Issue>
+             </Message>
+             <Message Id="ModuleId" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Created="2016-09-03 19:49:38Z">
+              <Issue>
+               <Item>'IPCDataReceiver.WndProc(ref Message)'</Item>
+               <Item>'ModuleId'</Item>
+               <Item>'int'</Item>
+              </Issue>
+             </Message>
+             <Message Id="ValueAfter" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Created="2016-09-03 19:49:38Z">
+              <Issue>
+               <Item>'IPCDataReceiver.WndProc(ref Message)'</Item>
+               <Item>'ValueAfter'</Item>
+               <Item>'double'</Item>
+              </Issue>
+             </Message>
+             <Message Id="ValueBefore" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Created="2016-09-03 19:49:38Z">
+              <Issue>
+               <Item>'IPCDataReceiver.WndProc(ref Message)'</Item>
+               <Item>'ValueBefore'</Item>
+               <Item>'double'</Item>
               </Issue>
              </Message>
             </Messages>
@@ -129,21 +171,23 @@
    </Target>
   </Targets>
   <Rules>
-   <Rule TypeName="DoNotIgnoreMethodResults" Category="Microsoft.Usage" CheckId="CA1806">
-    <Resolution Name="HResultOrErrorCode">{0} calls {1} but does not use the HRESULT or error code that the method returns. This could lead to unexpected behavior in error conditions or low-resource situations. Use the result in a conditional statement, assign the result to a variable, or pass it as an argument to another method.</Resolution>
-   </Rule>
-   <Rule TypeName="DoNotRaiseReservedExceptionTypes" Category="Microsoft.Usage" CheckId="CA2201">
-    <Resolution Name="Reserved">{0} creates an exception of type {1}, an exception type that is reserved by the runtime and should never be raised by managed code. If this exception instance might be thrown, use a different exception type.</Resolution>
-   </Rule>
    <Rule TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709">
     <Resolution Name="Assembly">Correct the casing of '{0}' in assembly name {1} by changing it to '{2}'.</Resolution>
+    <Resolution Name="Member">Correct the casing of '{0}' in member name {1} by changing it to '{2}'.</Resolution>
     <Resolution Name="Namespace">Correct the casing of '{0}' in namespace name '{1}' by changing it to '{2}'.</Resolution>
+    <Resolution Name="Type">Correct the casing of '{0}' in type name {1} by changing it to '{2}'.</Resolution>
    </Rule>
-   <Rule TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704">
-    <Resolution Name="MemberParameter">In method {0}, correct the spelling of '{1}' in parameter name {2} or remove it entirely if it represents any sort of Hungarian notation.</Resolution>
+   <Rule TypeName="IdentifiersShouldNotContainUnderscores" Category="Microsoft.Naming" CheckId="CA1707">
+    <Resolution Name="Member">Remove the underscores from member name {0}.</Resolution>
    </Rule>
-   <Rule TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822">
-    <Resolution Name="Default">The 'this' parameter (or 'Me' in Visual Basic) of {0} is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Resolution>
+   <Rule TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804">
+    <Resolution Name="Default">{0} declares a variable, {1}, of type {2}, which is never used or is only assigned to. Use this variable or remove it.</Resolution>
+   </Rule>
+   <Rule TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305">
+    <Resolution Name="IFormatProviderAlternateString">Because the behavior of {0} could vary based on the current user's locale settings, replace this call in {1} with a call to {2}. If the result of {2} will be displayed to the user, specify {3} as the 'IFormatProvider' parameter. Otherwise, if the result will be stored and accessed by software, such as when it is persisted to disk or to a database, specify {4}.</Resolution>
+   </Rule>
+   <Rule TypeName="TypeNamesShouldNotMatchNamespaces" Category="Microsoft.Naming" CheckId="CA1724">
+    <Resolution Name="Default">The type name {0} conflicts in whole or in part with the namespace name '{1}'. Change either name to eliminate the conflict.</Resolution>
    </Rule>
   </Rules>
  </FxCopReport>
