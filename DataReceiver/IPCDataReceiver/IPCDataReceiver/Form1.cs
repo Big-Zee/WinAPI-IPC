@@ -11,15 +11,32 @@ using DataToSend;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Globalization;
+using System.Collections.Concurrent;
 
 namespace IPCDataReceiver
 {
     public partial class IPCDataReceiver : Form
     {
+
+        /// <summary>
+        /// 
+        /// </summary>
+        System.Timers.Timer twoSecondsTimer = new System.Timers.Timer();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private BlockingCollection<MessagePacket> collecitionOfMsgs = new BlockingCollection<MessagePacket>();
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        private int MsgsReceivedCounter = 0;
+
         /// <summary>
         /// Windows Message - CopyData
         /// </summary>
-        public const Int32 WM_COPYDATA = 0x4A;
+        private const Int32 WM_COPYDATA = 0x4A;
 
         /// <summary>
         /// The COPYDATASTRUCT describes the data that is passed.
@@ -34,17 +51,32 @@ namespace IPCDataReceiver
             public IntPtr dwData;
             public int cbData;
             public IntPtr lpData;
-        }
-
-        private Stopwatch MessagesStopWatch = new Stopwatch();
-        private int MessagesReceivedCount = 1;
-        private long sum = 0;
-        private double avarage = 0.0;
+        }        
 
         public IPCDataReceiver()
         {
             InitializeComponent();
+            StartQueueAndTimer();
         }        
+
+        private void StartQueueAndTimer()
+        {
+            StartMessagesProcessorThread();
+            StartTwoSecondsTimer();
+        }
+
+        private void StartTwoSecondsTimer()
+        {
+            twoSecondsTimer = new System.Timers.Timer(20000);
+            twoSecondsTimer.Elapsed += twoSecondsTimer_Elapsed;
+            twoSecondsTimer.AutoReset = true;
+            twoSecondsTimer.Start();            
+        }
+
+        private void twoSecondsTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            Trace.WriteLine("Received Messages : " + MsgsReceivedCounter);
+        }
 
         /// <summary>
         /// Override WndProc to watch for messages. Monitoring for incoming messages to appMainWindow
@@ -55,37 +87,55 @@ namespace IPCDataReceiver
         {
             if (m.Msg == WM_COPYDATA)
             {
-                if (MessagesStopWatch.IsRunning)
-                {
-                    MessagesStopWatch.Stop();
-                    Trace.WriteLine("Ticks taken : " + MessagesStopWatch.ElapsedTicks + " - [Ticks]");
-                    sum = sum + MessagesStopWatch.ElapsedTicks;
-                    avarage = sum / MessagesReceivedCount;
-                    MessagesStopWatch.Reset();
-                    Trace.WriteLine("Ticks stats - avarage ticks : " + avarage);
-                    MessagesReceivedCount++;
-                    UpdateLabelAvarage(avarage);
-                }
                 var msg = (COPYDATASTRUCT)Marshal.PtrToStructure(m.LParam, typeof(COPYDATASTRUCT));
                 var pData = (MessagePacket)Marshal.PtrToStructure(msg.lpData, typeof(MessagePacket));
+                AddToQueue(pData);
+                /*
                 var MessageTitle = pData.MessageTitle;
                 var MessageDescription = pData.MessageDescription;
                 var ErrorId = pData.ErrorId;
                 var ModuleId = pData.ModuleId;
                 var ValueBefore = pData.ValueBefore;
-                var ValueAfter = pData.ValueAfter;
-                if (!MessagesStopWatch.IsRunning)
-                {
-                    MessagesStopWatch.Start();
-                }
+                var ValueAfter = pData.ValueAfter;*/
             }
             //Process rest of messages normally.
             base.WndProc(ref m);
+        }        
+
+        private void StartMessagesProcessorThread()
+        {
+            Task.Factory.StartNew(() =>
+            {
+                foreach (var singleMessage in collecitionOfMsgs.GetConsumingEnumerable())
+                {
+                    MsgsReceivedCounter++;
+                }
+            }).ContinueWith(s => { collecitionOfMsgs.Dispose();});
         }
 
-        private void UpdateLabelAvarage(double avarageTicks)
+        private void AddToQueue(MessagePacket msgPacket)
         {
-            labelTicksAvarage.Text = avarageTicks.ToString(CultureInfo.CurrentCulture);
+            if (!collecitionOfMsgs.IsAddingCompleted)
+            {
+                collecitionOfMsgs.Add(msgPacket);
+            }
+        }
+
+        private void StopQueueThread()
+        {
+            collecitionOfMsgs.CompleteAdding();
+        }
+
+        private void StopAndDisposeTwoSecondsTimer()
+        {
+            twoSecondsTimer.Stop();
+            twoSecondsTimer.Dispose();
+        }
+
+        private void IPCDataReceiver_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            StopQueueThread();
+            StopAndDisposeTwoSecondsTimer();
         }
     }
 }

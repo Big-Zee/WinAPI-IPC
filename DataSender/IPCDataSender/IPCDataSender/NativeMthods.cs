@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace IPCDataSender
 {
-    public class NativeMethods
+    public static class NativeMethods
     {
         /// <summary>
         /// FindWindow winAPI method
@@ -64,12 +64,12 @@ namespace IPCDataSender
             preAllocated = IntPtr.Zero;
         }
 
-        public int FindWindow(string windowName)
+        public static int FindWindow(string windowName)
         {
             return FindWindow(null, windowName);
         }
 
-        public void SendData(int hWnd, string txtToSend)
+        public static void SendData(int hWnd, string txtToSend)
         {
             MessagePacket singlePacket = new MessagePacket();
             singlePacket.MessageTitle = "Single message title : " + txtToSend;
@@ -86,7 +86,6 @@ namespace IPCDataSender
             copyData.cbData = Marshal.SizeOf(singlePacket);
             IntPtr copyDataBuff = IntPtrAlloc(copyData);
             var result = SendMessage(hWnd, WM_COPYDATA, 0, copyDataBuff);
-            Trace.WriteLine("SendMessage result : " + result);
             IntPtrFree(ref copyDataBuff);
             IntPtrFree(ref buffer);
         }

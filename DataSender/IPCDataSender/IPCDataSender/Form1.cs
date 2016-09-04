@@ -9,15 +9,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DataToSend;
 using System.Runtime.InteropServices;
+using System.Diagnostics;
 
 [assembly: CLSCompliant(true)]
 namespace IPCDataSender
 {
     public partial class FormMain : Form
     {
-        
-        private static int counter = 0;
-
         public FormMain()
         {
             InitializeComponent();
@@ -25,22 +23,23 @@ namespace IPCDataSender
 
         private void buttonSendMessage_Click(object sender, EventArgs e)
         {
-            NativeMethods nativeMethods = new NativeMethods();
             var ReceiverMainWindowTitle = "IPCDataReceiver";
-            int ReceiverHandle = nativeMethods.FindWindow(ReceiverMainWindowTitle);
+            int ReceiverHandle = NativeMethods.FindWindow(ReceiverMainWindowTitle);
+            int size = System.Runtime.InteropServices.Marshal.SizeOf(typeof(MessagePacket));
             if (ReceiverHandle != 0)
-            {
-                
-                for (int i = 0; i < 100; i++)
+            {                
+                var count=0;
+                Stopwatch sw = new Stopwatch();
+                sw.Start();                
+                do
                 {
-                    nativeMethods.SendData(ReceiverHandle, "Count" + i);
-                }
+                    NativeMethods.SendData(ReceiverHandle, "Count" + count);
+                    count++;
+                } while (sw.ElapsedMilliseconds <= 60000);
+                Trace.WriteLine("Sent : " + count + " messages");
+                var structsPerSec = (count/60);
+                Trace.WriteLine("Sent Msgs - (structs) / second : " + structsPerSec);
             }
-            else
-            {
-
-            }
-            counter++;
         }
     }
 }
