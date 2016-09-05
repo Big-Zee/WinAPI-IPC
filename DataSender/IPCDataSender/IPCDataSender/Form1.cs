@@ -30,15 +30,21 @@ namespace IPCDataSender
             {                
                 var count=0;
                 Stopwatch sw = new Stopwatch();
-                sw.Start();                
-                do
+                sw.Start();
+                Task.Factory.StartNew(() =>
                 {
-                    NativeMethods.SendData(ReceiverHandle, "Count" + count);
-                    count++;
-                } while (sw.ElapsedMilliseconds <= 60000);
-                Trace.WriteLine("Sent : " + count + " messages");
-                var structsPerSec = (count/60);
-                Trace.WriteLine("Sent Msgs - (structs) / second : " + structsPerSec);
+                    do
+                    {
+                        NativeMethods.SendData(ReceiverHandle, "Count" + count);
+                        count++;
+                    } while (sw.ElapsedMilliseconds <= 60000);
+                }).ContinueWith(s =>
+                {
+                    Trace.WriteLine("Sent : " + count + " messages");
+                    var structsPerSec = (count / 60);
+                    Trace.WriteLine("Sent Msgs - (structs) / second : " + structsPerSec);
+                    MessageBox.Show("Sent : " + count + " , " + structsPerSec + " (structs) / second ");
+                });
             }
         }
     }

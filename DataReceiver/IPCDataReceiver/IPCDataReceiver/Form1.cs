@@ -90,8 +90,8 @@ namespace IPCDataReceiver
                 var msg = (COPYDATASTRUCT)Marshal.PtrToStructure(m.LParam, typeof(COPYDATASTRUCT));
                 var pData = (MessagePacket)Marshal.PtrToStructure(msg.lpData, typeof(MessagePacket));
                 AddToQueue(pData);
-                /*
-                var MessageTitle = pData.MessageTitle;
+                
+                /*var MessageTitle = pData.MessageTitle;
                 var MessageDescription = pData.MessageDescription;
                 var ErrorId = pData.ErrorId;
                 var ModuleId = pData.ModuleId;
