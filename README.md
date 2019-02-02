@@ -1,2 +1,2 @@
 # WinAPI-IPC
-C# WinaAPI solutions with IPC example
+C# WinAPI solutions with IPC example
